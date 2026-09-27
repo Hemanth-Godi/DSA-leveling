@@ -15,8 +15,8 @@ export function LandingHeader() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="site-header absolute inset-x-0 top-0 z-50">
-      <div className="mx-auto mt-3 flex h-[64px] max-w-[1240px] items-center justify-between rounded-2xl border border-white/[0.12] bg-[#11101d]/65 px-4 shadow-[0_18px_50px_rgba(0,0,0,.28)] backdrop-blur-xl sm:px-6">
+    <header className="site-header fixed inset-x-0 top-0 z-50 transition-all duration-300">
+      <div className="mx-auto mt-3 flex h-[64px] max-w-[1240px] items-center justify-between rounded-2xl border border-white/[0.12] bg-[#11101d]/85 px-4 shadow-[0_18px_50px_rgba(0,0,0,.4)] backdrop-blur-2xl sm:px-6">
         <BrandMark />
 
         <nav className="hidden items-center gap-8 lg:flex" aria-label="Main navigation">

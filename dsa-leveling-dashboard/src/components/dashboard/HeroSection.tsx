@@ -1,33 +1,84 @@
 import { useState, useEffect } from 'react';
 import {
   ArrowRight,
-  CheckCircle2,
   ChevronRight,
+  Code2,
   Flame,
+  Layers,
+  Map,
+  Pause,
   Play,
   ShieldCheck,
   Sparkles,
-  Sword,
+  Swords,
   Trophy,
   Users,
   X,
   Zap,
 } from 'lucide-react';
-import heroBg from '../../assets/dashboard-hero.png';
+import dungeon1 from '../../assets/dungon1.png';
+import dungeon3 from '../../assets/dungon3.png';
+import dungeon5 from '../../assets/dungon5.png';
 import rankE from '../../assets/rank-E.png';
 import rankD from '../../assets/rank-D.png';
 import rankC from '../../assets/rank-C.png';
 import rankS from '../../assets/rank-S.png';
-import dungeon1 from '../../assets/dungon1.png';
-import dungeon2 from '../../assets/dungon2.png';
-import dungeon3 from '../../assets/dungon3.png';
-import dungeon4 from '../../assets/dungon4.png';
-import dungeon5 from '../../assets/dungon5.png';
 
 const benefits = [
   { icon: Users, text: 'Join a global community of learners' },
   { icon: ShieldCheck, text: 'Track your progress and stay consistent' },
   { icon: Trophy, text: 'Build skills for real world opportunities' },
+];
+
+const processCards = [
+  {
+    step: '01',
+    badge: 'PHASE 01 · EXPLORATION',
+    title: 'Enter Topic Dungeons',
+    copy: 'Progress through structured DSA dungeons — from Arrays & Strings to Advanced Graphs and Dynamic Programming.',
+    icon: Map,
+    accent: 'border-violet-500/30 bg-violet-950/20 text-violet-300',
+    iconBg: 'bg-violet-500/15 border-violet-400/30 text-violet-300',
+    tags: ['5 Dungeons', '500+ Handpicked Problems', 'Tier 1 to 5'],
+    metric: '+12,500 Total XP Available',
+    indicator: 'bg-violet-400',
+  },
+  {
+    step: '02',
+    badge: 'PHASE 02 · COMBAT',
+    title: 'Slay Code Challenges',
+    copy: 'Code solutions against rigorous test suites. Optimize time and space complexity to conquer dungeon boss monsters.',
+    icon: Code2,
+    accent: 'border-cyan-500/30 bg-cyan-950/20 text-cyan-300',
+    iconBg: 'bg-cyan-500/15 border-cyan-400/30 text-cyan-300',
+    tags: ['O(N) Complexity', 'Hidden Edge Cases', 'Instant Feedback'],
+    metric: '+150 XP per Boss Defeated',
+    indicator: 'bg-cyan-400',
+  },
+  {
+    step: '03',
+    badge: 'PHASE 03 · PROGRESSION',
+    title: 'Earn XP & Hunter Streaks',
+    copy: 'Compound your skills with daily bounties. Level up your hunter attributes and maintain unshakeable consistency streaks.',
+    icon: Flame,
+    accent: 'border-fuchsia-500/30 bg-fuchsia-950/20 text-fuchsia-300',
+    iconBg: 'bg-fuchsia-500/15 border-fuchsia-400/30 text-fuchsia-300',
+    tags: ['Daily Bounties', 'Streak Multipliers', 'Level 1 → 50'],
+    metric: '🔥 7-Day Consistency Multiplier',
+    indicator: 'bg-fuchsia-400',
+  },
+  {
+    step: '04',
+    badge: 'PHASE 04 · PRESTIGE',
+    title: 'Ascend to S-Rank Glory',
+    copy: 'Rise from E-Rank novice to the legendary S-Rank. Unlock exclusive hunter titles, avatars, badges, and verified certificates.',
+    icon: Trophy,
+    accent: 'border-amber-500/30 bg-amber-950/20 text-amber-300',
+    iconBg: 'bg-amber-500/15 border-amber-400/30 text-amber-300',
+    tags: ['Rank E → S', 'Leaderboards', 'Verified Certificate'],
+    metric: 'Elite Hunter Certification',
+    indicator: 'bg-amber-400',
+  },
 ];
 
 const trailerSteps = [
@@ -54,24 +105,7 @@ const trailerSteps = [
 export function HeroSection() {
   const [isTrailerOpen, setIsTrailerOpen] = useState(false);
   const [activeTab, setActiveTab] = useState(0);
-  const [xp, setXp] = useState(1450);
-  const [levelUpNotice, setLevelUpNotice] = useState(false);
-  const maxXp = 2000;
-
-  const handleSimulateXp = () => {
-    if (xp + 250 >= maxXp) {
-      setXp(maxXp);
-      setLevelUpNotice(true);
-      setTimeout(() => setLevelUpNotice(false), 3000);
-    } else {
-      setXp((prev) => prev + 250);
-    }
-  };
-
-  const handleResetXp = () => {
-    setXp(1450);
-    setLevelUpNotice(false);
-  };
+  const [isPaused, setIsPaused] = useState(false);
 
   // Close trailer on ESC key
   useEffect(() => {
@@ -88,46 +122,37 @@ export function HeroSection() {
     };
   }, [isTrailerOpen]);
 
-  const xpPercent = Math.min(100, Math.round((xp / maxXp) * 100));
-
   return (
     <section
       id="home"
-      className="hero-section relative min-h-[760px] overflow-hidden bg-[#07070e] pt-24 pb-16 sm:min-h-[820px] sm:pt-28 sm:pb-20 lg:min-h-[880px] lg:pt-32 lg:pb-24"
+      className="hero-section relative min-h-[760px] overflow-hidden bg-[#07070e] pt-28 pb-16 sm:min-h-[820px] sm:pt-32 sm:pb-20 lg:min-h-[880px] lg:pt-36 lg:pb-24 flex items-center"
     >
-      {/* Background artwork: Solo Leveling Hunter & Monolith */}
+      {/* Sleek, clean atmospheric gaming tech background (No background hero image) */}
       <div className="pointer-events-none absolute inset-0 select-none overflow-hidden">
-        <img
-          src={heroBg}
-          alt="DSA Leveling Hunter facing the purple dungeon monolith"
-          className="h-full w-full object-cover object-[78%_center] sm:object-[72%_center] lg:object-right-top transition-transform duration-1000 ease-out"
-        />
+        {/* Ambient radial lighting glows */}
+        <div className="absolute right-[-10%] top-[-15%] h-[600px] w-[600px] rounded-full bg-violet-600/12 blur-[130px] animate-pulse-glow" />
+        <div className="absolute left-[-10%] top-[40%] h-[500px] w-[500px] rounded-full bg-indigo-600/10 blur-[130px]" />
+        <div className="absolute right-[25%] bottom-[5%] h-[400px] w-[400px] rounded-full bg-fuchsia-600/8 blur-[120px]" />
 
-        {/* Ambient layered gradients for 100% text readability & atmospheric blending */}
-        {/* Left deep dark vignette behind copy */}
-        <div className="absolute inset-y-0 left-0 w-full sm:w-[82%] lg:w-[68%] bg-gradient-to-r from-[#07070e] via-[#07070e]/95 to-transparent z-10" />
+        {/* Tech grid texture */}
+        <div className="hero-grid absolute inset-0 opacity-25" />
 
-        {/* Mobile/Tablet overall dark wash to keep text ultra-crisp */}
-        <div className="absolute inset-0 bg-[#07070e]/45 lg:hidden z-10" />
-
-        {/* Top gradient for navbar blending */}
-        <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#07070e] via-[#07070e]/60 to-transparent z-10" />
+        {/* Ambient floating energy sparks */}
+        <div className="absolute inset-0">
+          <span className="absolute top-[22%] left-[18%] h-1.5 w-1.5 rounded-full bg-violet-300 shadow-[0_0_12px_#c084fc] animate-float-gentle opacity-60" />
+          <span className="absolute top-[48%] right-[15%] h-2 w-2 rounded-full bg-fuchsia-400 shadow-[0_0_16px_#e879f9] animate-float-gentle [animation-delay:1.8s] opacity-50" />
+          <span className="absolute top-[75%] left-[32%] h-1.5 w-1.5 rounded-full bg-cyan-300 shadow-[0_0_10px_#67e8f9] animate-float-gentle [animation-delay:3s] opacity-60" />
+        </div>
 
         {/* Bottom smooth fade into the rest of the page */}
-        <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-[#07070e] via-[#07070e]/80 to-transparent z-10" />
-
-        {/* Monolith Apex Purple Rune Glow */}
-        <div className="absolute right-[12%] sm:right-[18%] lg:right-[20%] top-[12%] lg:top-[14%] h-64 w-64 rounded-full bg-violet-600/30 blur-[90px] animate-pulse-glow pointer-events-none z-10" />
-
-        {/* Subtle cyber grid texture */}
-        <div className="hero-grid absolute inset-0 z-10 opacity-20 pointer-events-none" />
+        <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#07070e] to-transparent" />
       </div>
 
       {/* Hero Content Container */}
-      <div className="relative z-20 mx-auto max-w-[1240px] px-5 sm:px-8">
-        <div className="grid min-h-[640px] items-center gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:gap-12">
+      <div className="relative z-20 mx-auto w-full max-w-[1260px] px-5 sm:px-8">
+        <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
           {/* Left Column: Hero Copy & Actions */}
-          <div className="hero-copy max-w-[640px]">
+          <div className="hero-copy max-w-[620px]">
             {/* Kicker badge */}
             <div className="hero-kicker mb-5 inline-flex items-center gap-2 rounded-full border border-violet-400/30 bg-[#160d2b]/80 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-violet-200 shadow-[0_0_25px_rgba(168,85,247,0.22)] backdrop-blur-md">
               <Sparkles size={12} className="text-violet-300 animate-pulse" />
@@ -135,7 +160,7 @@ export function HeroSection() {
             </div>
 
             {/* Main Headline */}
-            <h1 className="hero-title font-display text-[42px] font-bold leading-[1.02] tracking-[-0.035em] text-white sm:text-[56px] lg:text-[68px] xl:text-[74px]">
+            <h1 className="hero-title font-display text-[42px] font-bold leading-[1.02] tracking-[-0.035em] text-white sm:text-[56px] lg:text-[66px] xl:text-[72px]">
               Turn DSA into a
               <span className="mt-1 block bg-gradient-to-r from-white via-violet-200 to-fuchsia-300 bg-clip-text text-transparent drop-shadow-[0_0_35px_rgba(192,132,252,0.38)]">
                 Leveling Journey
@@ -187,7 +212,7 @@ export function HeroSection() {
               <span className="text-zinc-400">500+ Handpicked Dungeons</span>
             </div>
 
-            {/* Benefits Strip (Matching dashboard reference) */}
+            {/* Benefits Strip */}
             <div className="hero-benefits mt-9 grid max-w-[620px] grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-3">
               {benefits.map(({ icon: Icon, text }) => (
                 <div
@@ -203,116 +228,115 @@ export function HeroSection() {
             </div>
           </div>
 
-          {/* Right Column: Motto & Interactive Hunter Awakening HUD */}
-          <div className="relative flex flex-col justify-between self-stretch pt-6 lg:pt-0">
-            {/* "DISCIPLINE SOLVES EVERYTHING" Watermark (Top right from reference) */}
-            <div className="pointer-events-none hidden select-none text-right font-display text-xs uppercase tracking-[0.34em] text-violet-300/50 lg:block xl:text-sm">
-              <p>D I S C I P L I N E</p>
-              <p className="mt-1">S O L V E S</p>
-              <p className="mt-1">E V E R Y T H I N G</p>
-            </div>
-
-            {/* Floating Dungeon Sparks / Ambient Runes */}
-            <div className="pointer-events-none absolute inset-0 hidden lg:block overflow-hidden">
-              <span className="absolute top-[28%] left-[20%] h-1.5 w-1.5 rounded-full bg-violet-300 shadow-[0_0_12px_#c084fc] animate-float-gentle opacity-75" />
-              <span className="absolute top-[42%] right-[25%] h-2 w-2 rounded-full bg-fuchsia-400 shadow-[0_0_16px_#e879f9] animate-float-gentle [animation-delay:1.5s] opacity-60" />
-              <span className="absolute top-[65%] left-[35%] h-1.5 w-1.5 rounded-full bg-indigo-300 shadow-[0_0_10px_#818cf8] animate-float-gentle [animation-delay:2.5s] opacity-70" />
-            </div>
-
-            {/* Interactive Floating Hunter HUD Card */}
-            <div className="mt-6 lg:mt-auto w-full max-w-[420px] mx-auto lg:mx-0 lg:ml-auto rounded-2xl border border-violet-300/25 bg-[#0f0c22]/85 p-5 shadow-[0_20px_50px_rgba(0,0,0,0.5),0_0_30px_rgba(139,92,246,0.18)] backdrop-blur-xl transition duration-300 hover:border-violet-300/50">
-              {/* Card Header */}
-              <div className="flex items-center justify-between border-b border-violet-300/10 pb-3">
-                <div className="flex items-center gap-2">
-                  <span className="relative flex h-2 w-2">
-                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-violet-400 opacity-75" />
-                    <span className="relative inline-flex h-2 w-2 rounded-full bg-violet-400" />
-                  </span>
-                  <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-violet-300">
-                    System HUD · Hunter Status
-                  </span>
-                </div>
-                <span className="rounded-full border border-violet-400/30 bg-violet-500/10 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-violet-200">
-                  Live Preview
+          {/* Right Column: Live Sliding Train of 4 Process Cards */}
+          <div className="relative w-full overflow-hidden rounded-3xl border border-violet-300/20 bg-[#0e0c1f]/80 p-5 shadow-[0_24px_70px_rgba(0,0,0,0.5),0_0_40px_rgba(139,92,246,0.15)] backdrop-blur-2xl sm:p-6">
+            {/* Train Header with Live Status & Controls */}
+            <div className="mb-4 flex items-center justify-between border-b border-white/[0.08] pb-3.5">
+              <div className="flex items-center gap-2.5">
+                <span className="relative flex h-2.5 w-2.5">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-violet-400 opacity-75" />
+                  <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-violet-400" />
+                </span>
+                <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-violet-200">
+                  The Leveling Process
+                </span>
+                <span className="hidden sm:inline-block rounded-full border border-violet-400/30 bg-violet-500/15 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-violet-300">
+                  4 Stages
                 </span>
               </div>
 
-              {/* Hunter Profile Row */}
-              <div className="mt-3.5 flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="relative grid h-11 w-11 place-items-center rounded-xl border border-violet-400/30 bg-violet-950/60 shadow-[0_0_20px_rgba(147,51,234,0.3)]">
-                    <img src={rankC} alt="Hunter Rank C" className="h-9 w-9 object-contain" />
-                  </div>
-                  <div>
-                    <h3 className="text-sm font-bold text-white">Hunter Jin-Woo</h3>
-                    <p className="text-[11px] text-zinc-400">
-                      Rank C Hunter <span className="text-zinc-600">·</span> Level 12
-                    </p>
-                  </div>
-                </div>
-
-                <div className="text-right">
-                  <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-amber-300">
-                    <Flame size={13} className="text-amber-400" /> 7 Day Streak
-                  </span>
-                  <p className="text-[10px] text-zinc-500">Daily Quest Active</p>
-                </div>
-              </div>
-
-              {/* Active Dungeon & XP Gauge */}
-              <div className="mt-4 rounded-xl border border-white/[0.06] bg-black/30 p-3">
-                <div className="flex items-center justify-between text-[11px]">
-                  <span className="flex items-center gap-1.5 font-medium text-zinc-300">
-                    <Sword size={12} className="text-violet-400" />
-                    Dungeon 01: Arrays & Hashing
-                  </span>
-                  <span className="font-mono text-xs font-bold text-violet-300">{xpPercent}%</span>
-                </div>
-
-                {/* Progress bar */}
-                <div className="mt-2 h-2 overflow-hidden rounded-full bg-white/[0.08]">
-                  <div
-                    className="h-full rounded-full bg-gradient-to-r from-violet-600 via-fuchsia-500 to-indigo-400 shadow-[0_0_12px_rgba(168,85,247,0.7)] transition-all duration-500 ease-out"
-                    style={{ width: `${xpPercent}%` }}
-                  />
-                </div>
-
-                <div className="mt-2 flex items-center justify-between text-[10px] text-zinc-400">
-                  <span>{xp.toLocaleString()} / {maxXp.toLocaleString()} XP</span>
-                  <span className="text-violet-300">
-                    {maxXp - xp > 0 ? `${maxXp - xp} XP to Level 13` : 'Ready for Promotion!'}
-                  </span>
-                </div>
-              </div>
-
-              {/* Interactive Simulator Button */}
-              <div className="mt-3 flex items-center gap-2">
+              {/* Pause / Play Control */}
+              <div className="flex items-center gap-2">
                 <button
                   type="button"
-                  onClick={handleSimulateXp}
-                  disabled={xp >= maxXp}
-                  className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-lg border border-violet-400/30 bg-violet-600/20 py-2 text-[11px] font-semibold text-violet-200 transition duration-200 hover:bg-violet-600/35 hover:text-white disabled:opacity-50"
+                  onClick={() => setIsPaused((prev) => !prev)}
+                  className="inline-flex items-center gap-1.5 rounded-lg border border-white/10 bg-white/[0.04] px-2.5 py-1 text-[10px] font-medium text-zinc-300 transition hover:border-violet-300/40 hover:bg-violet-500/15 hover:text-white"
+                  aria-label={isPaused ? 'Resume train' : 'Pause train'}
                 >
-                  <Zap size={12} className="text-violet-300" />
-                  {xp >= maxXp ? 'Max XP Reached!' : 'Simulate Solving Problem (+250 XP)'}
+                  {isPaused ? <Play size={10} fill="currentColor" /> : <Pause size={10} />}
+                  <span>{isPaused ? 'Resume' : 'Pause'}</span>
                 </button>
-
-                {xp >= maxXp && (
-                  <button
-                    type="button"
-                    onClick={handleResetXp}
-                    className="rounded-lg border border-white/10 px-2.5 py-2 text-[10px] text-zinc-400 hover:text-white"
-                  >
-                    Reset
-                  </button>
-                )}
               </div>
+            </div>
 
-              {levelUpNotice && (
-                <div className="mt-2 flex items-center justify-center gap-1.5 rounded-lg bg-emerald-500/20 py-1 text-[11px] font-semibold text-emerald-300 animate-bounce">
-                  <CheckCircle2 size={13} /> Promotion Dungeon Gate Unlocked!
-                </div>
-              )}
+            {/* Sliding Train Conveyor Track with Seamless Edge Fades */}
+            <div className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_4%,black_96%,transparent)] py-1">
+              <div className={`train-track ${isPaused ? 'is-paused' : ''}`}>
+                {/* 4 process cards duplicated once to make an infinite seamless loop */}
+                {[...processCards, ...processCards].map((card, index) => {
+                  const Icon = card.icon;
+                  return (
+                    <article
+                      key={`${card.step}-${index}`}
+                      className="group relative flex w-[280px] shrink-0 flex-col justify-between rounded-2xl border border-white/[0.09] bg-gradient-to-b from-white/[0.06] to-white/[0.015] p-5 shadow-[0_12px_30px_rgba(0,0,0,0.35)] backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-violet-400/40 hover:shadow-[0_16px_36px_rgba(139,92,246,0.25)] sm:w-[310px]"
+                    >
+                      {/* Top Header of Card */}
+                      <div>
+                        <div className="flex items-center justify-between">
+                          <span className="rounded-full border border-white/10 bg-white/[0.04] px-2.5 py-0.5 text-[9px] font-bold uppercase tracking-[0.16em] text-violet-300">
+                            {card.badge}
+                          </span>
+                          <span className="font-mono text-xs font-black text-zinc-500 group-hover:text-violet-300 transition-colors">
+                            #{card.step}
+                          </span>
+                        </div>
+
+                        {/* Icon & Title */}
+                        <div className="mt-4 flex items-center gap-3">
+                          <div
+                            className={`grid h-10 w-10 shrink-0 place-items-center rounded-xl border ${card.iconBg} shadow-sm transition group-hover:scale-105`}
+                          >
+                            <Icon size={19} strokeWidth={2} />
+                          </div>
+                          <h3 className="text-[15px] font-bold text-white group-hover:text-violet-100 transition-colors">
+                            {card.title}
+                          </h3>
+                        </div>
+
+                        {/* Description */}
+                        <p className="mt-3 text-xs leading-5 text-zinc-300/90">{card.copy}</p>
+
+                        {/* Tag Chips */}
+                        <div className="mt-4 flex flex-wrap gap-1.5">
+                          {card.tags.map((tag) => (
+                            <span
+                              key={tag}
+                              className="rounded-md border border-white/[0.07] bg-black/30 px-2 py-0.5 text-[10px] font-medium text-zinc-300"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Card Footer Metric */}
+                      <div className="mt-5 border-t border-white/[0.07] pt-3 flex items-center justify-between text-[11px]">
+                        <span className="flex items-center gap-1.5 font-semibold text-zinc-200">
+                          <span className={`h-1.5 w-1.5 rounded-full ${card.indicator}`} />
+                          {card.metric}
+                        </span>
+                        <ChevronRight size={14} className="text-zinc-500 group-hover:text-violet-300 group-hover:translate-x-0.5 transition-all" />
+                      </div>
+                    </article>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Stepper Footer Guide */}
+            <div className="mt-4 flex items-center justify-between border-t border-white/[0.06] pt-3 text-[11px] text-zinc-400">
+              <span className="text-[10px] uppercase tracking-wider text-zinc-500">
+                Hover to pause · Continuous live track
+              </span>
+              <div className="flex items-center gap-1.5">
+                {processCards.map((c) => (
+                  <span
+                    key={c.step}
+                    className="h-1.5 w-5 rounded-full bg-violet-400/30 transition hover:bg-violet-400"
+                    title={`Stage ${c.step}: ${c.title}`}
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </div>

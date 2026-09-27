@@ -77,6 +77,20 @@ button:focus-visible, a:focus-visible { outline: 2px solid #d8b4fe; outline-offs
 @keyframes hero-slide { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-50% - 9px)); } }
 @keyframes pulse-glow { 0%, 100% { opacity: .28; transform: scale(1); } 50% { opacity: .65; transform: scale(1.12); } }
 @keyframes float-gentle { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+@keyframes train-slide {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(-50% - 8px)); }
+}
+.train-track {
+  display: flex;
+  gap: 16px;
+  width: max-content;
+  animation: train-slide 24s linear infinite;
+}
+.train-track:hover,
+.train-track.is-paused {
+  animation-play-state: paused;
+}
 .animate-pulse-glow { animation: pulse-glow 5s ease-in-out infinite; }
 .animate-float-gentle { animation: float-gentle 4s ease-in-out infinite; }
 
