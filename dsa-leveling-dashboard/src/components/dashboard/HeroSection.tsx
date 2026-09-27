@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import {
   ArrowRight,
   ChevronRight,
@@ -125,7 +126,7 @@ export function HeroSection() {
   return (
     <section
       id="home"
-      className="hero-section relative min-h-[760px] overflow-hidden bg-[#07070e] pt-28 pb-16 sm:min-h-[820px] sm:pt-32 sm:pb-20 lg:min-h-[880px] lg:pt-36 lg:pb-24 flex items-center"
+      className="hero-section relative overflow-hidden bg-[#07070e] pt-24 pb-12 sm:pt-24 sm:pb-16 lg:pt-28 lg:pb-16"
     >
       {/* Sleek, clean atmospheric gaming tech background (No background hero image) */}
       <div className="pointer-events-none absolute inset-0 select-none overflow-hidden">
@@ -179,13 +180,13 @@ export function HeroSection() {
 
             {/* CTA Action Buttons */}
             <div className="hero-actions mt-8 flex flex-wrap items-center gap-3.5">
-              <a
-                href="#about"
+              <Link
+                to="/register"
                 className="group inline-flex items-center gap-2.5 rounded-xl bg-gradient-to-r from-violet-600 via-fuchsia-600 to-indigo-600 px-7 py-3.5 text-sm font-semibold text-white shadow-[0_10px_35px_rgba(124,58,237,0.4)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_16px_45px_rgba(124,58,237,0.55)] active:translate-y-0"
               >
                 <span>Start Your Journey</span>
                 <ArrowRight size={17} className="transition-transform duration-300 group-hover:translate-x-1" />
-              </a>
+              </Link>
 
               <button
                 type="button"
@@ -440,14 +441,14 @@ export function HeroSection() {
                 >
                   Close
                 </button>
-                <a
-                  href="#about"
+                <Link
+                  to="/register"
                   onClick={() => setIsTrailerOpen(false)}
                   className="inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 px-5 py-2 text-xs font-bold text-white shadow-[0_0_20px_rgba(139,92,246,0.4)] hover:from-violet-500 hover:to-indigo-500"
                 >
                   <span>Begin Leveling Now</span>
                   <ChevronRight size={14} />
-                </a>
+                </Link>
               </div>
             </div>
           </div>

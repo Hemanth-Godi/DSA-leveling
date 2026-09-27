@@ -1,4 +1,5 @@
 import { ArrowRight, BarChart3, Sparkles, Trophy, Users } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const stats = [
   { icon: Users, value: '10K+', label: 'Learners Worldwide' },
@@ -17,10 +18,18 @@ export function FinalCta() {
           <h2 className="font-display text-4xl leading-none text-white sm:text-[42px]">Ready to Begin Your Journey?</h2>
           <p className="mt-2 text-sm text-zinc-400">Join thousands of learners and start leveling up your DSA skills today.</p>
           <div className="mt-6 flex flex-wrap justify-center gap-3 lg:justify-start">
-            <button className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-violet-600 to-fuchsia-500 px-6 py-3 text-sm font-semibold text-white shadow-[0_12px_35px_rgba(124,58,237,.3)] transition hover:-translate-y-0.5">
+            <Link
+              to="/register"
+              className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-violet-600 to-fuchsia-500 px-6 py-3 text-sm font-semibold text-white shadow-[0_12px_35px_rgba(124,58,237,.3)] transition hover:-translate-y-0.5"
+            >
               Start Your Journey <ArrowRight size={17} />
-            </button>
-            <button className="rounded-xl border border-violet-200/40 px-6 py-3 text-sm font-medium text-white transition hover:border-violet-200/70 hover:bg-white/[0.04]">Login</button>
+            </Link>
+            <Link
+              to="/login"
+              className="rounded-xl border border-violet-200/40 px-6 py-3 text-sm font-medium text-white transition hover:border-violet-200/70 hover:bg-white/[0.04]"
+            >
+              Login
+            </Link>
           </div>
         </div>
 
