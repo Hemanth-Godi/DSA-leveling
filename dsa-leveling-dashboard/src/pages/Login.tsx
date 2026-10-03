@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   ArrowRight,
   Diamond,
@@ -14,11 +14,18 @@ import rankC from '../assets/rank-C.png';
 import rankS from '../assets/rank-S.png';
 
 export default function Login() {
+  const navigate = useNavigate();
   const [showPass, setShowPass] = useState(false);
   const [form, setForm] = useState({ email: '', password: '' });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    localStorage.setItem('isLoggedIn', 'true');
+    navigate('/dashboard');
   };
 
   return (
@@ -97,7 +104,7 @@ export default function Login() {
             </div>
 
             {/* Form */}
-            <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+            <form className="space-y-4" onSubmit={handleSubmit}>
               {/* Email */}
               <div>
                 <label className="mb-1.5 block text-[12px] font-semibold uppercase tracking-wider text-zinc-400">

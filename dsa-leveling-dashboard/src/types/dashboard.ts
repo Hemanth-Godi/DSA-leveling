@@ -11,6 +11,8 @@ export interface UserStats {
   dungeonsCleared: number;
 }
 
+export type DungeonState = 'available' | 'locked' | 'completed';
+
 export interface Dungeon {
   name: string;
   progress: number;
@@ -18,6 +20,8 @@ export interface Dungeon {
   totalProblems: number;
   difficulty: string;
   xpAvailable: number;
+  state: DungeonState;
+  unlockRequirement?: string;
 }
 
 export interface Mission {

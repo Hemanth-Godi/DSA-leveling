@@ -2,7 +2,7 @@ import { Shield } from 'lucide-react';
 import type { CSSProperties } from 'react';
 import { GlassCard } from './GlassCard';
 import { RankEmblem } from './RankEmblem';
-import { user } from '../../data/mockDashboard';
+import { returningUser as user } from '../../data/mockDashboard';
 
 export function HunterStatus() {
   const progress = Math.round((user.currentXp / user.nextLevelXp) * 100);
