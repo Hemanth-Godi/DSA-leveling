@@ -7,6 +7,7 @@ import Roadmap from './pages/Roadmap';
 import Dungeon from './pages/Dungeon';
 import Profile from './pages/Profile';
 import Rewards from './pages/Rewards';
+import Leaderboard from './pages/Leaderboard';
 import Login from './pages/Login';
 import Register from './pages/Register';
 
@@ -28,7 +29,7 @@ export default function App() {
           <Route path="/dungeons/:topicId" element={<ProtectedRoute><Dungeon /></ProtectedRoute>} />
           <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
           <Route path="/rewards" element={<ProtectedRoute><Rewards /></ProtectedRoute>} />
-          <Route path="/leaderboard" element={<ProtectedRoute><div className="p-8 text-center text-zinc-400">Leaderboard - Coming Soon</div></ProtectedRoute>} />
+          <Route path="/leaderboard" element={<ProtectedRoute><Leaderboard /></ProtectedRoute>} />
         </Route>
 
         {/* Auth routes without navbar */}

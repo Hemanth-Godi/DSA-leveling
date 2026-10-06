@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+
+# Frontend build
+dist/
+
+# Environment variables
+.env
+.env.*
+
+# Java build
+target/
+
+# IDE
+.idea/
+*.iml
+
+# VS Code
+.vscode/
+
+# Kilo
+.kilo/
